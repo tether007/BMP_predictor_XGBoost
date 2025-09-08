@@ -2,87 +2,104 @@
 
 ## Free Deployment Options
 
-### Option 1: Railway (Recommended - Easiest)
-
-1. **Create Railway Account**
-   - Go to [railway.app](https://railway.app)
-   - Sign up with GitHub
-
-2. **Deploy from GitHub**
-   - Push your code to GitHub
-   - Connect Railway to your GitHub repo
-   - Railway will auto-detect Python and deploy
-
-3. **Environment Variables**
-   - No additional setup needed
-   - Railway handles everything automatically
-
-**Pros:** Super easy, automatic HTTPS, custom domains
-**Cons:** 500 hours/month free, then $5/month
-
-### Option 2: Render (Free Tier)
+### Option 1: Render (Recommended - Best Free Tier)
 
 1. **Create Render Account**
    - Go to [render.com](https://render.com)
    - Sign up with GitHub
 
-2. **Create Web Service**
-   - Connect your GitHub repo
-   - Choose "Web Service"
-   - Build Command: `pip install -r requirements.txt`
-   - Start Command: `uvicorn app:app --host 0.0.0.0 --port $PORT`
+2. **Deploy from GitHub**
+   - Push your code to GitHub
+   - Connect Render to your GitHub repo
+   - Render will auto-detect Python and deploy
 
-3. **Free Tier Limits**
-   - 750 hours/month
+3. **Free Tier Details**
+   - 750 hours/month (31 days)
    - Sleeps after 15 minutes of inactivity
    - Takes ~30 seconds to wake up
 
-### Option 3: Heroku (Free Tier Discontinued)
+**Pros:** Most generous free tier, easy deployment, automatic HTTPS
+**Cons:** Sleeps after inactivity (30s wake-up time)
 
-Heroku no longer offers free hosting, but you can use:
-- **Heroku Eco Plan**: $5/month
-- Same deployment process as before
-
-### Option 4: PythonAnywhere (Free Tier)
+### Option 2: PythonAnywhere (Always Online)
 
 1. **Create Account**
    - Go to [pythonanywhere.com](https://pythonanywhere.com)
    - Sign up for free account
 
 2. **Upload Files**
-   - Upload your project files
-   - Install dependencies in Bash console
+   - Upload your project files via web interface
+   - Install dependencies in Bash console: `pip3.10 install --user -r requirements.txt`
 
 3. **Configure Web App**
-   - Create new web app
-   - Point to your WSGI file
+   - Go to Web tab, create new web app
+   - Choose "Manual configuration"
+   - Edit WSGI file to point to your app
 
-**Pros:** Always online, no sleeping
+**Pros:** Always online, no sleeping, simple setup
 **Cons:** Limited CPU seconds, custom domains cost extra
 
-## Quick Start with Railway
+### Option 3: Fly.io (Free Tier)
+
+1. **Create Account**
+   - Go to [fly.io](https://fly.io)
+   - Sign up and install flyctl
+
+2. **Deploy**
+   ```bash
+   flyctl launch
+   flyctl deploy
+   ```
+
+3. **Free Tier Details**
+   - 3 shared-cpu-1x VMs
+   - 256MB RAM each
+   - Apps sleep when not used
+
+**Pros:** Docker-based, good performance
+**Cons:** More complex setup, requires Docker knowledge
+
+### Option 4: Vercel (Serverless)
+
+1. **Create Account**
+   - Go to [vercel.com](https://vercel.com)
+   - Sign up with GitHub
+
+2. **Deploy**
+   - Connect GitHub repo
+   - Vercel auto-detects Python
+
+3. **Free Tier Details**
+   - 100GB bandwidth/month
+   - 1000 serverless function invocations
+   - Perfect for APIs
+
+**Pros:** Serverless, scales automatically, fast
+**Cons:** Cold starts, 10s execution limit
+
+## Quick Start with Render (Recommended)
 
 1. **Push to GitHub**
    ```bash
    git init
    git add .
-   git commit -m "Initial commit"
+   git commit -m "BPM Predictor API ready for deployment"
    git remote add origin https://github.com/yourusername/bmp-predictor.git
    git push -u origin main
    ```
 
-2. **Deploy on Railway**
-   - Go to [railway.app](https://railway.app)
-   - Click "New Project"
-   - Select "Deploy from GitHub repo"
-   - Choose your repository
-   - Railway will automatically deploy!
+2. **Deploy on Render**
+   - Go to [render.com](https://render.com)
+   - Click "New +" → "Web Service"
+   - Connect your GitHub repository
+   - Render will auto-detect Python settings
+   - Click "Create Web Service"
 
 3. **Get Your URL**
-   - Railway gives you a URL like: `https://your-app-name.railway.app`
+   - Render gives you a URL like: `https://your-app-name.onrender.com`
    - Your API will be available at:
-     - `https://your-app-name.railway.app/predict` (HTML form)
-     - `https://your-app-name.railway.app/docs` (API documentation)
+     - `https://your-app-name.onrender.com/predict` (HTML form)
+     - `https://your-app-name.onrender.com/docs` (API documentation)
 
 ## Testing Your Deployed API
 
@@ -124,10 +141,11 @@ curl -X POST https://your-app-name.railway.app/predict_json \
 
 | Platform | Free Tier | Paid Plans | Best For |
 |----------|-----------|------------|----------|
-| Railway | 500 hrs/month | $5/month | Easy deployment |
-| Render | 750 hrs/month | $7/month | Always-on apps |
-| PythonAnywhere | Limited CPU | $5/month | Learning/prototyping |
+| Render | 750 hrs/month | $7/month | Best free tier |
+| PythonAnywhere | Limited CPU | $5/month | Always online |
+| Fly.io | 3 VMs, 256MB each | $1.94/month | Docker apps |
+| Vercel | 100GB bandwidth | $20/month | Serverless APIs |
 
 ## Recommendation
 
-**Start with Railway** - it's the easiest and most reliable for your use case!
+**Start with Render** - it has the most generous free tier and is super easy to deploy!
