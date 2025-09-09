@@ -3,7 +3,7 @@ import joblib
 import os
 
 # Load the model
-model = joblib.load(r"models\XGBoost.joblib")
+model = joblib.load("models\XGBoost.joblib")
 
 # Read the test data
 test_df = pd.read_csv("dataset/test.csv")

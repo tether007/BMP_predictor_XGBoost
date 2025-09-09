@@ -15,7 +15,7 @@ app = FastAPI()
 
 # Load model
 try:
-    model = joblib.load("XGBoost.joblib")
+    model = joblib.load("models\XGBoost.joblib")
 except Exception as exc:
     
     raise RuntimeError(f"Failed to load model: {exc}")
