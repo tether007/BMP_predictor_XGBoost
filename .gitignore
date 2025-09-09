@@ -46,4 +46,4 @@ Thumbs.db
 # Model files (if large)
 # *.joblib
 # *.pkl
-/dataset
+dataset/
